@@ -18,12 +18,12 @@ function App() {
 
   const handlePause = (): void => {
     setIsRunning(false);
-    clearInterval(intervalRef.current);
+    clearInterval(intervalRef.current!);
   };
 
   const handleReset = (): void => {
     setIsRunning(false);
-    clearInterval(intervalRef.current);
+    clearInterval(intervalRef.current!);
     setTime(0);
   };
 
