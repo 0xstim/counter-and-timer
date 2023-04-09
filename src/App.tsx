@@ -4,34 +4,30 @@ import viteLogo from '/vite.svg'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
-  // create a timer that i can set and reset
-  // create a timer that i can pause and resume
-  // create a timer that i can set and reset
-  // create a timer that i can pause and resume
-  const [time, setTime] = useState(0);
-  const [isRunning, setIsRunning] = useState(false);
-  const intervalRef = useRef(null);
+  const [count, setCount] = useState<number>(0)
+  const [time, setTime] = useState<number>(0);
+  const [isRunning, setIsRunning] = useState<boolean>(false);
+  const intervalRef = useRef<number | null>(null);
 
-  const handleStart = () => {
+  const handleStart = (): void => {
     setIsRunning(true);
     intervalRef.current = setInterval(() => {
       setTime(prevTime => prevTime + 10); // add 10ms instead of 1s
     }, 10); // set interval to 10ms instead of 1000ms
   };
 
-  const handlePause = () => {
+  const handlePause = (): void => {
     setIsRunning(false);
     clearInterval(intervalRef.current);
   };
 
-  const handleReset = () => {
+  const handleReset = (): void => {
     setIsRunning(false);
     clearInterval(intervalRef.current);
     setTime(0);
   };
 
-  const formatTime = (time) => {
+  const formatTime = (time: number): string => {
     const milliseconds = `0${time % 1000}`.slice(-3); // get last 3 digits of time
     const seconds = `0${Math.floor(time / 1000) % 60}`.slice(-2); // calculate seconds
     const minutes = `0${Math.floor(time / 60000)}`.slice(-2); // calculate minutes
@@ -55,10 +51,10 @@ function App() {
         <button onClick={handleReset}>Reset</button>
       </div>
       <div className="card">
+        <div className="count">{count}</div>
         <button onClick={() => setCount((count) => count + 1)}>
           Count
         </button>
-        <div className="count">{count}</div>
       </div>
       <button onClick={handleResetCount}>Reset Count</button>
     </div>
